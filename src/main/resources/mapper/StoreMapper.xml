@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dr.mapper.StoreMapper">
+	<select id="selectAll" resultType="com.dr.pojo.Store">
+		select s.import_id, s.store_id, s.import_date, s.remain_num, s.supply, s.unit, s.location, d.DrugName drug_name
+		from store s LEFT JOIN drug d
+		on s.drug_id = d.DrugNo
+	</select>
+	
+	<select id="selectByName" parameterType="java.lang.String" resultType="com.dr.pojo.Store">
+		select s.import_id, s.store_id, s.import_date, s.remain_num, s.supply, s.unit, s.location, d.DrugName drug_name
+		from store s LEFT JOIN drug d
+		on s.drug_id = d.DrugNo
+    	WHERE d.DrugName like '%${value}%'
+	</select>
+	
+	<select id="findByDrugId" parameterType="java.lang.Integer" resultType="com.dr.pojo.Store">
+		select * from store
+		where drug_id = ${value}
+	</select>
+	
+	<update id="importStore" parameterType="com.dr.pojo.Import_store">
+		UPDATE store
+		set remain_num = remain_num + ${importNum} , supply = '${supply}' , location = '${location}'
+		where drug_id = ${drugId}
+	</update>
+	
+	<insert id="insertStore" parameterType="com.dr.pojo.Import_store">
+		insert INTO store(import_id, drug_id, import_date, remain_num, supply, unit, location)
+		VALUES(${importId}, ${drugId}, CURDATE(), ${importNum}, '${supply}', '箱', '${location}')
+	</insert>
+	
+	<update id="exportStore" parameterType="com.dr.pojo.ExportStore">
+		UPDATE store
+		SET remain_num = remain_num - ${exportNum}
+		WHERE drug_id = ${drugId}
+	</update>
+	
+	<delete id="deleteStoreById" parameterType="java.lang.Integer">
+		delete
+		FROM store
+		WHERE store_id = ${value}
+	</delete>
+</mapper>

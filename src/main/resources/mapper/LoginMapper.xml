@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dr.mapper.LoginMapper">
+<!-- 	
+	<resultMap type="user" id="userResult">
+	
+		<id column="id" property="id"/>
+		<result column="password" property="password"/>
+		<result column="username" property="username"/>
+	</resultMap>
+
+	<select id="findUser"  resultMap="userResult">
+		select * from t_user where id=1
+	</select>
+	
+-->
+	<sql id="select_user_where">
+		<if test="account!=null and account!=''">
+			and account ='${account}'
+		</if>
+		<if test="password!=null and password!=''">
+			and password ='${password}'
+		</if>
+	</sql>
+	
+	<select id="findUser" parameterType="com.dr.pojo.User"
+		resultType="com.dr.pojo.User">
+		SELECT * FROM sysuser
+		<where>
+			<include refid="select_user_where"></include>
+		</where>
+	</select>
+ 
+</mapper>

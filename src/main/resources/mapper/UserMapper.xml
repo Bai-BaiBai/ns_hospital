@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dr.mapper.UserMapper">
+	<!-- <select id="getUserList" resultType="com.dr.pojo.User">
+		select u.*,d.deptName
+		from sysuser u LEFT JOIN dept d
+		ON u.deptId = d.deptId
+	</select>
+	
+	<select id="selectByName" parameterType="java.lang.String" resultType="com.dr.pojo.User">
+		SELECT * from sysuser
+		LEFT JOIN dept
+		on sysuser.deptId = dept.deptId
+		where `name` LIKE '%${value}%'
+	</select>
+	
+	<insert id="doUserAdd" parameterType="com.dr.pojo.User">
+		insert INTO sysuser(account,password,name,deptId,enable) 
+					VALUES('${account}','${password}','${name}','${deptId}',${enable})
+	</insert>
+	
+	<select id="findUserByAccount" parameterType="java.lang.String" resultType="com.dr.pojo.User">
+		select * from sysuser where account = '${value}'
+	</select> -->
+	
+	<select id="findUserById" parameterType="java.lang.Integer" resultType="com.dr.pojo.User">
+		select * from user where id = #{value}
+	</select>
+	
+	<select id="getUserList" resultType="com.dr.pojo.User">
+		select * from user
+	</select>
+	
+	<insert id="doUserAdd" parameterType="com.dr.pojo.User">
+		insert into user(account, password, enable)
+		values(#{account}, #{password}, #{enable})
+	</insert>
+	
+	<select id="findUserByAccount" parameterType="java.lang.String" resultType="com.dr.pojo.User">
+		select * from user where account = #{account}
+	</select>
+</mapper>
