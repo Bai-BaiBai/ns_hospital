@@ -33,8 +33,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'username', '1234', 0, 1);
-INSERT INTO `user` VALUES (4, 'bai', '$2a$10$xu79slIH9P5VN8Bwm51W2uo.gG3V9ZFJfp4wysYa3UPwQ4r9Ln2HS', 0, 1);
-INSERT INTO `user` VALUES (5, 'admin', '$2a$10$jzCVU.Tudwhu51Oq813jpOJx93ubJEsMxgaHvkmXBnyOewWRuABqe', 0, 1);
+INSERT INTO `user` VALUES (1, 'username', '$2a$10$Ubwel1PO5dPeFI4vwEfgX.obiGFbiZHaXDDkUzalWxWk1GFMFGiSC', 0, 1);
+INSERT INTO `user` VALUES (4, 'bai', '$$2a$10$xu79slIH9P5VN8Bwm51W2uo.gG3V9ZFJfp4wysYa3UPwQ4r9Ln2HS', 0, 1);
+INSERT INTO `user` VALUES (5, 'admin', '$$2a$10$w.LDlpgKUDJ9eOgu0vx0.u//HCbZ2tUFuf53cWWmJzVvYZJkeIAAu', 0, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
