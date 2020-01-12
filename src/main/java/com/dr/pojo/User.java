@@ -1,11 +1,10 @@
 package com.dr.pojo;
 
-import java.sql.Date;
-import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 public class User implements UserDetails{
 	private Integer id;
@@ -146,37 +145,31 @@ public class User implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return getAccount();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return getDel() == 0;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return getEnable() == 1;
 	}
 }
