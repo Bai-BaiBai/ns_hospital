@@ -31,13 +31,18 @@
 	<select id="getUserList" resultType="com.dr.pojo.User">
 		select * from user
 	</select>
-	
+
 	<insert id="doUserAdd" parameterType="com.dr.pojo.User">
 		insert into user(account, password, enable)
 		values(#{account}, #{password}, #{enable})
 	</insert>
-	
+
 	<select id="findUserByAccount" parameterType="java.lang.String" resultType="com.dr.pojo.User">
 		select * from user where account = #{account}
 	</select>
+
+	<update id="updateUserInfo" parameterType="com.dr.pojo.User">
+		update user set password = '${password}', enable = '${enable}'
+		where account = '${account}'
+	</update>
 </mapper>

@@ -1,20 +1,15 @@
 package com.dr.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.security.core.context.SecurityContextImpl;
+import com.dr.pojo.User;
+import com.dr.service.DeptService;
+import com.dr.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dr.pojo.Dept;
-import com.dr.pojo.User;
-import com.dr.service.DeptService;
-import com.dr.service.UserService;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -74,15 +69,31 @@ public class UserController {
 		if(!userService.findUserByAccount(user.getAccount())){//返回true表明存在该用户
 			userService.doUserAdd(user);
 			modelAndView = getUserList();
-		}else{
+		} else {
 			modelAndView.addObject("ERROR", "账户已存在");
 //			ArrayList<Dept> dept = deptService.getDeptList();
 //			modelAndView.addObject("dept", dept);
 			modelAndView.setViewName("../userManage/userAdd");
 		}
-		
+
 		return modelAndView;
 	}
-	
-	
+
+	/**
+	 * 修改用户信息
+	 *
+	 * @param user
+	 * @param modelAndView
+	 * @return 调用查询用户列表方法，以返回用户列表页面
+	 * @throws Exception
+	 */
+	@RequestMapping("/doUserModify")
+	public ModelAndView doUserModify(User user, ModelAndView modelAndView) throws Exception {
+
+		userService.updateUser(user);
+		modelAndView = getUserList();
+
+		return modelAndView;
+	}
+
 }

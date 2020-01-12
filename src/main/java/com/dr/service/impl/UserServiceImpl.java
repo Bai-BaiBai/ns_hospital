@@ -4,6 +4,7 @@ import com.dr.mapper.UserMapper;
 import com.dr.pojo.User;
 import com.dr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserById(Integer id) throws Exception {
 		return userMapper.findUserById(id);
+	}
+
+	/**
+	 * 修改用户信息
+	 *
+	 * @param user
+	 * @return
+	 */
+	@Override
+	public boolean updateUser(User user) {
+		String encodePassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodePassword);
+		int i = userMapper.updateUserInfo(user);
+		return true;
+	}
+
+	public static void main(String[] args) {
+		String rawPassword = "admin";
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		System.out.println(passwordEncoder.encode(rawPassword));
 	}
 
 }
